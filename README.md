@@ -1,6 +1,6 @@
 ## Описание
 
-Это Dockerfile, позволяющие собрать простой образ для Docker с Nginx, PHP-FPM и поддержкой Let's Encrypt. PHP версии 7.0 из репозитория [Dotdeb](https://www.dotdeb.org/). Установка Nginx из официального репозитория.
+Это Dockerfile, позволяющие собрать простой образ для Docker с Nginx, PHP-FPM и поддержкой Let's Encrypt. PHP версии 7.0 из репозитория [Dotdeb](https://www.dotdeb.org/). Установка Nginx производится из официального репозитория.
 
 ### Установлены следующие расширения PHP
 
@@ -24,7 +24,10 @@ sudo docker pull mirafox/nginx-php-fpm
 ## Запуск
 
 ```
-sudo docker run -d -p 80:80 -p 443:443 mirafox/nginx-php-fpm
+sudo docker run -d -p 80:80 -p 443:443 \
+    -v /home/username/sitename/www/:/var/www/html/ \
+    -v /home/username/sitename/logs/:/var/log/nginx/ \
+    mirafox/nginx-php-fpm
 ```
 
 ## Доступные параметры конфигурации
