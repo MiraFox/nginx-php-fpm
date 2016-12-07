@@ -9,10 +9,17 @@ if [ -z "$SSL_DOMAIN" ] || [ -z "$SSL_EMAIL" ]; then
 
 else
 
-    /usr/bin/certbot certonly --webroot -w /var/www/html -d $SSL_DOMAIN --email $SSL_EMAIL --agree-tos --non-interactive
+    IFS=',' read -r -a domains <<< "$SSL_DOMAIN"
+    for domain in "${domains[@]}"
+    do
+        cmd_domain=${cmd_domain}" -d $domain "
+    done
 
-    sed -i "s/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/letsencrypt\/live\/$SSL_DOMAIN\/fullchain.pem/g" /etc/nginx/sites-available/default-ssl
-    sed -i "s/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/letsencrypt\/live\/$SSL_DOMAIN\/privkey.pem/g" /etc/nginx/sites-available/default-ssl
+    cmd='/usr/bin/certbot certonly --webroot -w /var/www/html '${cmd_domain}' --email admin@vhost.com --agree-tos --non-interactive'
+    eval $cmd
+
+    sed -i "s/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/letsencrypt\/live\/${domains[0]}\/fullchain.pem/g" /etc/nginx/sites-available/default-ssl
+    sed -i "s/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/letsencrypt\/live\/${domains[0]}\/privkey.pem/g" /etc/nginx/sites-available/default-ssl
 
     /usr/bin/supervisorctl restart nginx
 

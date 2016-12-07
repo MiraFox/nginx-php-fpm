@@ -88,7 +88,7 @@ sudo docker run -d -e 'PHP_MODULE_MEMCACHED=On' -d mirafox/nginx-php-fpm
 
 ```
 sudo docker run -d \
-    -e 'SSL_DOMAIN=example.com' \
+    -e 'SSL_DOMAIN=example.com,www.example.com' \
     -e 'SSL_EMAIL=admin@example.com' \
     mirafox/nginx-php-fpm
 ```
