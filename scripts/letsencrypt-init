@@ -15,7 +15,7 @@ else
         cmd_domain=${cmd_domain}" -d $domain "
     done
 
-    cmd='/usr/bin/certbot certonly --webroot -w /var/www/html '${cmd_domain}' --email admin@vhost.com --agree-tos --non-interactive'
+    cmd='/usr/bin/certbot certonly --webroot -w /var/www/html '${cmd_domain}' --email '$SSL_EMAIL' --agree-tos --non-interactive'
     eval $cmd
 
     sed -i "s/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/letsencrypt\/live\/${domains[0]}\/fullchain.pem/g" /etc/nginx/sites-available/default-ssl
