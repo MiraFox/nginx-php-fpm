@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# SSL_DOMAIN
+# SSL_EMAIL
+
+if [ -z "$SSL_DOMAIN" ] || [ -z "$SSL_EMAIL" ]; then
+
+    echo "You need the SSL_DOMAIN and the SSL_EMAIL variables"
+
+else
+
+    /usr/bin/certbot certonly --webroot -w /var/www/html -d $SSL_DOMAIN --email $SSL_EMAIL --agree-tos --non-interactive
+
+    sed -i "s/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/letsencrypt\/live\/$SSL_DOMAIN\/fullchain.pem/g" /etc/nginx/sites-available/default-ssl
+    sed -i "s/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/letsencrypt\/live\/$SSL_DOMAIN\/privkey.pem/g" /etc/nginx/sites-available/default-ssl
+
+    /usr/bin/supervisorctl restart nginx
+
+fi
