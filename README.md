@@ -1,6 +1,6 @@
 ## Описание
 
-Это Dockerfile, позволяющие собрать простой образ для Docker с Nginx, PHP-FPM и поддержкой Let's Encrypt. PHP версии 7.0 из репозитория [Dotdeb](https://www.dotdeb.org/)
+Это Dockerfile, позволяющие собрать простой образ для Docker с Nginx, PHP-FPM и поддержкой Let's Encrypt. PHP версии 7.0 из репозитория [Dotdeb](https://www.dotdeb.org/). Установка Nginx из официального репозитория.
 
 ### Установлены следующие расширения PHP
 
@@ -24,7 +24,7 @@ sudo docker pull mirafox/nginx-php-fpm
 ## Запуск
 
 ```
-sudo docker run -d mirafox/nginx-php-fpm
+sudo docker run -d -p 80:80 -p 443:443 mirafox/nginx-php-fpm
 ```
 
 ## Доступные параметры конфигурации
@@ -101,3 +101,19 @@ docker exec -it <CONTAINER_NAME> /usr/local/bin/letsencrypt-init
 ```
 docker exec -it <CONTAINER_NAME> /usr/local/bin/letsencrypt-renew
 ```
+
+## Использование собственных конфигурационных файлов
+
+Вы можете использовать собственные конфигурационные файлы для nginx и php. Для этого Вам необходимо создать их в директории **/var/www/html/config/**. При их обнаружении, Ваши конфигурационные файлы будут скопированы и заменят существующие.
+
+### Nginx
+
+ - **/var/www/html/config/nginx/nginx.conf** - данным файлом будет заменен /etc/nginx/nginx.conf
+ - **/var/www/html/config/nginx/nginx-vhost.conf** - данным файлом будет заменен /etc/nginx/sites-available/default
+ - **/var/www/html/config/nginx/nginx-vhost-ssl.conf** - данным файлом будет заменен /etc/nginx/sites-available/default-ssl
+
+### PHP
+
+ - **/var/www/html/config/php/php.ini** - данным файлом будет заменен /etc/php/7.0/fpm/php.ini (при этом параметры, изменяющие настройки PHP, переданные при запуске контейнера, будут игнорированы)
+ - **/var/www/html/config/php/pool.conf** - данным файлом будет заменен /etc/php/7.0/fpm/pool.d/www.conf
+

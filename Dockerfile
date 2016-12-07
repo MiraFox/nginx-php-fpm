@@ -2,6 +2,8 @@ FROM debian:jessie
 MAINTAINER Ruzhentsev Alexandr noc@mirafox.ru
 
 RUN apt-get update && apt-get install -y wget \
+    && echo deb http://nginx.org/packages/debian/ jessie nginx | tee /etc/apt/sources.list.d/nginx.list \
+    && wget https://nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key && rm -f nginx_signing.key \
     && echo deb http://packages.dotdeb.org jessie all | tee /etc/apt/sources.list.d/dotdeb.list \
     && wget https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg && rm -f dotdeb.gpg \
     && echo deb http://httpredir.debian.org/debian jessie-backports main | tee /etc/apt/sources.list.d/backports.list \
