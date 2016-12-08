@@ -112,8 +112,8 @@ docker exec -it <CONTAINER_NAME> /usr/local/bin/letsencrypt-renew
 ### Nginx
 
  - **/var/www/html/config/nginx/nginx.conf** - данным файлом будет заменен /etc/nginx/nginx.conf
- - **/var/www/html/config/nginx/nginx-vhost.conf** - данным файлом будет заменен /etc/nginx/sites-available/default
- - **/var/www/html/config/nginx/nginx-vhost-ssl.conf** - данным файлом будет заменен /etc/nginx/sites-available/default-ssl
+ - **/var/www/html/config/nginx/nginx-vhost.conf** - данным файлом будет заменен /etc/nginx/conf.d/default.conf
+ - **/var/www/html/config/nginx/nginx-vhost-ssl.conf** - данным файлом будет заменен /etc/nginx/conf.d/default-ssl.conf
 
 ### PHP
 

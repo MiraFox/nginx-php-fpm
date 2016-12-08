@@ -12,11 +12,11 @@ if [ -f /var/www/html/config/nginx/nginx.conf ]; then
 fi
 
 if [ -f /var/www/html/config/nginx/nginx-vhost.conf ]; then
-    cp /var/www/html/config/nginx/nginx-vhost.conf /etc/nginx/sites-available/default
+    cp /var/www/html/config/nginx/nginx-vhost.conf /etc/nginx/conf.d/default.conf
 fi
 
 if [ -f /var/www/html/config/nginx/nginx-vhost-ssl.conf ]; then
-    cp /var/www/html/config/nginx/nginx-vhost-ssl.conf /etc/nginx/sites-available/default-ssl
+    cp /var/www/html/config/nginx/nginx-vhost-ssl.conf /etc/nginx/conf.d/default-ssl.conf
 fi
 
 # применение пользовательского конфигурационного файла php-fpm

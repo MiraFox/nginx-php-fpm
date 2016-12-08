@@ -18,8 +18,8 @@ else
     cmd='/usr/bin/certbot certonly --webroot -w /var/www/html '${cmd_domain}' --email '$SSL_EMAIL' --agree-tos --non-interactive'
     eval $cmd
 
-    sed -i "s/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/letsencrypt\/live\/${domains[0]}\/fullchain.pem/g" /etc/nginx/sites-available/default-ssl
-    sed -i "s/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/letsencrypt\/live\/${domains[0]}\/privkey.pem/g" /etc/nginx/sites-available/default-ssl
+    sed -i "s/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/letsencrypt\/live\/${domains[0]}\/fullchain.pem/g" /etc/nginx/conf.d/default-ssl.conf
+    sed -i "s/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/letsencrypt\/live\/${domains[0]}\/privkey.pem/g" /etc/nginx/conf.d/default-ssl.conf
 
     /usr/bin/supervisorctl restart nginx
 
