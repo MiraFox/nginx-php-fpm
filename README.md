@@ -34,15 +34,17 @@ sudo docker run -d -p 80:80 -p 443:443 \
 
 ### Параметры изменяющие настройки PHP
 
- - **PHP_TIMEZONE**: устанавливает временную зону date.timezone, по умолчанию Europe/Moscow
- - **PHP_MEMORY_LIMIT**: устанавливает значение директивы memory_limit, по умолчанию 128M
- - **PHP_SHORT_OPEN_TAG**: устанавливает значение директоривы short_open_tag, по умолчанию On
- - **PHP_UPLOAD_MAX_FILEZIZE**: устанавливает значение директивы upload_max_filesize, по умолчанию 2M
- - **PHP_MAX_EXECUTION_TIME**: устанавливает значение директивы max_execution_time, по умолчанию 30
- - **PHP_MAX_INPUT_TIME**: устанавливает значение директивы max_input_time, по умолчанию 60
- - **PHP_DISPLAY_ERRORS**: устанавливает значение директивы display_errors, по умолчанию Off
- - **PHP_POST_MAX_SIZE**: устанавливает значение директивы post_max_size, по умолчанию 8M
- - **PHP_ALLOW_URL_FOPEN**: устанавливает значение директивы allow_url_fopen, по умолчанию On
+| Параметр | Изменяемая директива | По умолчанию |
+|----------|----------------------|--------------|
+|**PHP_ALLOW_URL_FOPEN**| allow_url_fopen | On |
+|**PHP_DISPLAY_ERRORS**| display_errors | Off |
+|**PHP_MAX_EXECUTION_TIME**| max_execution_time | 30 |
+|**PHP_MAX_INPUT_TIME**| max_input_time | 60 |
+|**PHP_MEMORY_LIMIT**| memory_limit | 128M |
+|**PHP_POST_MAX_SIZE**| post_max_size | 8M |
+|**PHP_SHORT_OPEN_TAG**| short_open_tag | On |
+|**PHP_TIMEZONE**| date.timezone | Europe/Moscow |
+|**PHP_UPLOAD_MAX_FILEZIZE**| upload_max_filesize | 2M |
 
 #### Пример использования
 

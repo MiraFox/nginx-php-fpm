@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y wget \
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/nginx-vhost.conf /etc/nginx/conf.d/default.conf
 COPY config/nginx-vhost-ssl.conf /etc/nginx/conf.d/default-ssl.conf
+COPY config/opcache.ini /etc/php/7.0/fpm/conf.d/20-opcache.ini
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY scripts/ /usr/local/bin/
 COPY src/ /var/www/html/
