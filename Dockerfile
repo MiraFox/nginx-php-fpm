@@ -1,9 +1,7 @@
-FROM debian:jessie
+FROM nginx:latest
 MAINTAINER Ruzhentsev Alexandr noc@mirafox.ru
 
 RUN apt-get update && apt-get install -y wget \
-    && echo deb http://nginx.org/packages/debian/ jessie nginx | tee /etc/apt/sources.list.d/nginx.list \
-    && wget https://nginx.org/keys/nginx_signing.key -O- | apt-key add - \
     && echo deb http://packages.dotdeb.org jessie all | tee /etc/apt/sources.list.d/dotdeb.list \
     && wget https://www.dotdeb.org/dotdeb.gpg  -O- | apt-key add - \
     && echo deb http://httpredir.debian.org/debian jessie-backports main | tee /etc/apt/sources.list.d/backports.list \
@@ -18,16 +16,13 @@ RUN apt-get update && apt-get install -y wget \
     && apt-get clean
 
 COPY config/nginx.conf /etc/nginx/nginx.conf
-COPY config/nginx-vhost.conf /etc/nginx/sites-available/default
-COPY config/nginx-vhost-ssl.conf /etc/nginx/sites-available/default-ssl
+COPY config/nginx-vhost.conf /etc/nginx/conf.d/default.conf
+COPY config/nginx-vhost-ssl.conf /etc/nginx/conf.d/default-ssl.conf
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY scripts/ /usr/local/bin/
 COPY src/ /var/www/html/
 
-RUN rm -f /var/log/nginx/access.log && ln -s /dev/stdout /var/log/nginx/access.log \
-    && rm -f /var/log/nginx/error.log && ln -s /dev/stdout /var/log/nginx/error.log \
-    && ln -s /etc/nginx/sites-available/default-ssl /etc/nginx/sites-enabled/default-ssl \
-    && chmod 755 /usr/local/bin/letsencrypt-init \
+RUN chmod 755 /usr/local/bin/letsencrypt-init \
     && chmod 755 /usr/local/bin/letsencrypt-renew \
     && chmod 755 /usr/local/bin/docker-entrypoint.sh
 

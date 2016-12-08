@@ -1,6 +1,6 @@
 ## Описание
 
-Это Dockerfile, позволяющие собрать простой образ для Docker с Nginx, PHP-FPM и поддержкой Let's Encrypt. PHP версии 7.0 из репозитория [Dotdeb](https://www.dotdeb.org/). Установка Nginx производится из официального репозитория.
+Это Dockerfile, позволяющие собрать простой образ для Docker с Nginx, PHP-FPM и поддержкой Let's Encrypt. PHP версии 7.0 из репозитория [Dotdeb](https://www.dotdeb.org/). Собран на основе официального образа nginx:latest.
 
 ### Установлены следующие расширения PHP
 

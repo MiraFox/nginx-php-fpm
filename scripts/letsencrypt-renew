@@ -6,7 +6,9 @@ if [ -z "$SSL_DOMAIN" ]; then
 
 else
 
-    if [ -f /etc/letsencrypt/live/$SSL_DOMAIN/fullchain.pem ]; then
+    IFS=',' read -r -a domains <<< "$SSL_DOMAIN"
+
+    if [ -f /etc/letsencrypt/live/${domains[0]}/fullchain.pem ]; then
 
         /usr/bin/certbot renew --dry-run
         /usr/bin/supervisorctl restart nginx
