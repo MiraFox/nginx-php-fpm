@@ -107,6 +107,12 @@ docker exec -it <CONTAINER_NAME> /usr/local/bin/letsencrypt-init
 docker exec -it <CONTAINER_NAME> /usr/local/bin/letsencrypt-renew
 ```
 
+## Использование PHP Composer
+
+```
+docker exec -it <CONTAINER_NAME> /usr/local/bin/composer
+```
+
 ## Использование собственных конфигурационных файлов
 
 Вы можете использовать собственные конфигурационные файлы для nginx и php. Для этого Вам необходимо создать их в директории **/var/www/html/config/**. При их обнаружении, Ваши конфигурационные файлы будут скопированы и заменят существующие.
